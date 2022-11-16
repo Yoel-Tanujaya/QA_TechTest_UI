@@ -16,16 +16,17 @@ import pages.BooksDetailPage;
 import pages.BooksPage;;
 
 public class BooksSteps {
-  private static String DRIVER_PATH = "/Users/yoeltan/Documents/";
+  // Change this to correct driver path on your system
+  private static String DRIVER_PATH = "/Users/yoeltan/Documents/chromedriver";
   private static String BASE_URL = "https://demoqa.com/books";
   private final WebDriver driver = new ChromeDriver();
+  
   private String bookName = "Git Pocket Guide";
-
   private Books book;
 
   @Given("User go to books page")
   public void User_go_to_books_page() {
-    System.setProperty("webdriver.chrome.driver",DRIVER_PATH+"chromedriver");
+    System.setProperty("webdriver.chrome.driver",DRIVER_PATH);
 		driver.manage().window().maximize();
     driver.get(BASE_URL);
   }

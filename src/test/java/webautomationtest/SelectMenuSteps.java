@@ -14,13 +14,14 @@ import io.cucumber.java.en.*;
 import pages.SelectMenuPage;
 
 public class SelectMenuSteps {
-  private static String DRIVER_PATH = "/Users/yoeltan/Documents/";
+  // Change this to correct driver path on your system
+  private static String DRIVER_PATH = "/Users/yoeltan/Documents/chromedriver";
   private static String BASE_URL = "https://demoqa.com/select-menu";
   private final WebDriver driver = new ChromeDriver();
 
   @Given("user go to homepage")
   public void user_go_to_homepage() {
-    System.setProperty("webdriver.chrome.driver",DRIVER_PATH+"chromedriver");
+    System.setProperty("webdriver.chrome.driver",DRIVER_PATH);
 		driver.manage().window().maximize();
     driver.get(BASE_URL);
 
