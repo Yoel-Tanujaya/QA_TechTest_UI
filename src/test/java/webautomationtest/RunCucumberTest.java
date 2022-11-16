@@ -22,8 +22,8 @@ import io.cucumber.junit.CucumberOptions;
     "src/test/resources/webautomationtest/books.feature",
   },
   glue={
-    "webautomationtest.SelectMenuDefinitions.java",
-    "webautomationtest.BooksDefinitions.java",
+    "webautomationtest.SelectMenuSteps.java",
+    "webautomationtest.BooksSteps.java",
   }
 )
 public class RunCucumberTest {

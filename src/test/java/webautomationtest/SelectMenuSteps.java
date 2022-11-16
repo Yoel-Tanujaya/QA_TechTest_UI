@@ -11,8 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.*;
+import pages.SelectMenuPage;
 
-public class SelectMenuDefinitions {
+public class SelectMenuSteps {
   private static String DRIVER_PATH = "/Users/yoeltan/Documents/";
   private static String BASE_URL = "https://demoqa.com/select-menu";
   private final WebDriver driver = new ChromeDriver();
@@ -29,41 +30,35 @@ public class SelectMenuDefinitions {
 
   @When("user in “select menu” page")
   public void user_in_select_menu_page() {
-    WebElement headerPage = driver.findElement(By.className("main-header"));
-    assertEquals("Select Menu", headerPage.getText());
+    SelectMenuPage selectMenu = new SelectMenuPage(driver);
+    assertEquals("Select Menu", selectMenu.getHeader().getText());    
   }
 
   @When("user choose select value “Another root option”")
   public void user_choose_select_value_Another_root_option() {
-    WebElement selectValueContainer = driver.findElement(By.id("withOptGroup"));
-    selectValueContainer.click();
-
-    WebElement valueDropdown = selectValueContainer.findElement(By.id("react-select-2-option-3"));
-    valueDropdown.click();
-
-    WebElement valueText = driver.findElement(By.xpath("//*[@id=\"withOptGroup\"]//div[contains(@class,\"singleValue\")]"));
-    assertEquals("Another root option", valueText.getText());
+    SelectMenuPage selectMenu = new SelectMenuPage(driver);
+    selectMenu.click_SelectValue();
+    selectMenu.click_ValueItem();
+    assertEquals("Another root option", selectMenu.getValueText().getText());
   }
 
   @When("user choose select one “Other”")
   public void user_choose_select_one_Other() {
-    WebElement selectOneContainer = driver.findElement(By.id("selectOne"));
-    selectOneContainer.click();
-
-    WebElement oneDropdown = selectOneContainer.findElement(By.id("react-select-3-option-0-5"));
-    oneDropdown.click();
-
-    WebElement oneText = driver.findElement(By.xpath("//*[@id=\"selectOne\"]//div[contains(@class,\"singleValue\")]"));
-    assertEquals("Other", oneText.getText());
+    SelectMenuPage selectMenu = new SelectMenuPage(driver);
+    selectMenu.click_SelectOne();
+    selectMenu.click_OneItem();
+    assertEquals("Other", selectMenu.getOneText().getText());
   }
 
   @When("user choose old style select menu “Aqua”")
   public void user_choose_old_style_select_menu_Aqua() {
-		Select selectMenu = new Select(driver.findElement(By.id("oldSelectMenu")));
-		selectMenu.selectByVisibleText("Aqua");
-    assertEquals(selectMenu.getFirstSelectedOption().getText(), "Aqua");
+    SelectMenuPage selectMenu = new SelectMenuPage(driver);
+    Select oldMenu = new Select(selectMenu.getOldSelectMenu());
+		oldMenu.selectByVisibleText("Aqua");
+    assertEquals(oldMenu.getFirstSelectedOption().getText(), "Aqua");
   }
 
+  // this part contains indexed elements iterated through for loop, will use old style for this
   @When("user choose multi select drop down “all color”")
   public void user_choose_multi_select_drop_down_all_color() {
     String[] color = {"","","",""};
